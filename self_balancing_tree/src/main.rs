@@ -34,7 +34,6 @@ fn insert_tree() {
     assert!(tree.head_node.clone().unwrap().lower_child.unwrap().value == 1);
     assert!(tree.head_node.clone().unwrap().lower_child.unwrap().lower_child.unwrap().value == 0);
     assert!(tree.head_node.clone().unwrap().higher_child.unwrap().value == 4);
-    
     assert!(tree.head_node.clone().unwrap().higher_child.unwrap().lower_child.unwrap().value == 3);
 
     tree.insert(-2);
@@ -162,4 +161,55 @@ fn exists_test() {
     assert!(!tree.exists(-1));
     tree.insert(-1);
     assert!(tree.exists(-1));
+}
+
+#[test]
+fn insert_experimental_test() {
+    let mut tree: Tree<isize> = Tree::new(&mut [1,0,5,4,3]);
+    /*
+    Tree should now be
+        3
+       / \
+      1   5
+     /   /
+    0   4     
+    */
+    assert!(tree.head_node.clone().unwrap().value == 3);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().value == 1);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().lower_child.unwrap().value == 0);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().value == 5);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().lower_child.unwrap().value == 4);
+
+    tree.insert_experimental(2);
+    /*
+    Tree should now be
+        3
+       / \
+      1    5
+     / \   /
+    0   2  4    
+    */
+    assert!(tree.head_node.clone().unwrap().value == 3);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().value == 1);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().lower_child.unwrap().value == 0);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().higher_child.unwrap().value == 2);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().value == 5);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().lower_child.unwrap().value == 4);
+
+    tree.insert_experimental(-2);
+    /*
+    Tree should now be 
+        2
+       / \
+      0    4
+     / \   / \
+   -2   1  3  5  
+    */
+    assert!(tree.head_node.clone().unwrap().value == 2);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().value == 0);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().lower_child.unwrap().value == -2);
+    assert!(tree.head_node.clone().unwrap().lower_child.unwrap().higher_child.unwrap().value == 1);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().value == 4);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().lower_child.unwrap().value == 3);
+    assert!(tree.head_node.clone().unwrap().higher_child.unwrap().higher_child.unwrap().value == 5);
 }

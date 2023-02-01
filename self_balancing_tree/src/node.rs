@@ -18,14 +18,14 @@ impl<T: std::cmp::Ord + std::marker::Copy> Node<T> {
         }
     }
 
-   /* pub fn set_lower_child(&mut self, value: T) {
+   pub fn set_lower_child(&mut self, value: T) {
         self.lower_child = Some(Box::new(Node::new_end_node(value)));
     }
 
     pub fn set_higher_child(&mut self, value: T) {
         self.higher_child = Some(Box::new(Node::new_end_node(value)));
 
-    }*/
+    }
     
     /**
      * the function that init. the whole tree.
